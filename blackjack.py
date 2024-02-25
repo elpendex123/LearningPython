@@ -31,18 +31,6 @@ def blackjack():
             else:
                 print(f"Dealer: {dealer_hand[0]['rank']}{dealer_hand[0]['suit']}, ???")
 
-        def handle_split():
-            nonlocal player_hand, decks
-            if player_hand[0]['rank'] == player_hand[1]['rank']:
-                if player_hand[0]['rank'] in ['10', 'J', 'Q', 'K'] and player_hand[1]['rank'] in ['10', 'J', 'Q', 'K']:
-                    print("Splitting your hand!")
-                    player_hand = [[player_hand[0], deal_card(decks)], [player_hand[1], deal_card(decks)]]
-                elif player_hand[0]['rank'] == 'A':
-                    print("Cannot split aces.")
-                else:
-                    print("Splitting your hand!")
-                    player_hand = [[player_hand[0], deal_card(decks)], [player_hand[1], deal_card(decks)]]
-
         def handle_double_down():
             nonlocal player_hand, decks
             if len(player_hand) == 2:
@@ -71,30 +59,26 @@ def blackjack():
                 display_hands()
                 if len(player_hand) == 2:
                     options = "Type 'h' to hit, 's' to stand, 'd' to double down"
-                    if player_hand[0]['rank'] == player_hand[1]['rank']:
-                        handle_split()
-                        options += ", 'p' to split"
                     if player_hand[0]['rank'] in ['10', 'J', 'Q', 'K']:
-                        handle_split()
-                        options += ", 'p' to split"
+                        options += ", 'd' to double down"
                     action = input(f"{options}: ").lower()
                     if action == 'd':
                         if handle_double_down():
                             # End the player's turn after doubling down
                             break
                     elif action == 'h':
-                        player_hand[0].append(deal_card(decks))
+                        player_hand.append(deal_card(decks))
                     elif action == 's':
                         break
                 else:
                     action = input("Type 'h' to hit, 's' to stand: ").lower()
                     if action == 'h':
-                        player_hand[0].append(deal_card(decks))
+                        player_hand.append(deal_card(decks))
                     elif action == 's':
                         break
 
-                player_score = calculate_score(player_hand[0])
-                if len(player_hand[0]) == 2 and player_score == 21:  # Check for blackjack only on the first 2 cards
+                player_score = calculate_score(player_hand)
+                if len(player_hand) == 2 and player_score == 21:  # Check for blackjack only on the first 2 cards
                     player_blackjack = True
                 elif player_score > 21:
                     player_busted = True
@@ -110,7 +94,7 @@ def blackjack():
             else:
                 if calculate_score(dealer_hand) > 21:
                     player_wins = True
-                elif calculate_score(player_hand[0]) > calculate_score(dealer_hand):
+                elif calculate_score(player_hand) > calculate_score(dealer_hand):
                     player_wins = True
 
                 if player_blackjack:
@@ -120,7 +104,7 @@ def blackjack():
                         print("Blackjack! You win!")
                 elif player_wins:
                     print("You win!")
-                elif calculate_score(player_hand[0]) == calculate_score(dealer_hand):
+                elif calculate_score(player_hand) == calculate_score(dealer_hand):
                     print("It's a draw.")
                 else:
                     print("You lose.")
