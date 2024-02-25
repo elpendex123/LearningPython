@@ -1,0 +1,15 @@
+total 41
+-rw-r--r-- 1 kike_ 197609  248 Feb 20 09:25 acryonym.py
+-rw-r--r-- 1 kike_ 197609  704 Feb 25 09:11 add_line_numbers.py
+-rw-r--r-- 1 kike_ 197609   92 Feb 20 09:25 ag.py
+-rw-r--r-- 1 kike_ 197609  716 Feb 21 13:56 binary_to_decimal.py
+-rw-r--r-- 1 kike_ 197609 1340 Feb 21 14:05 compound_interest.py
+-rw-r--r-- 1 kike_ 197609  845 Feb 20 09:25 fibonacci.py
+-rw-r--r-- 1 kike_ 197609 1136 Feb 20 09:25 hangman.py
+-rw-r--r-- 1 kike_ 197609    0 Feb 25 09:11 input.txt
+-rw-r--r-- 1 kike_ 197609  702 Feb 20 09:25 palindrome.py
+-rw-r--r-- 1 kike_ 197609 1787 Feb 20 09:25 password_generator.py
+-rw-r--r-- 1 kike_ 197609    6 Feb  7 00:29 README.md
+-rw-r--r-- 1 kike_ 197609 6572 Feb 24 16:44 sampling_class_work.py
+-rw-r--r-- 1 kike_ 197609  271 Feb 20 09:25 tip_calculator.py
+-rw-r--r-- 1 kike_ 197609  585 Feb 20 09:25 volume.py
