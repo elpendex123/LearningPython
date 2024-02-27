@@ -8,9 +8,9 @@ resources = {
 
 # Drink details
 drinks = {
-    'espresso': {'name': 'Espresso', 'water': 50, 'milk': 0, 'coffee': 18, 'cost': 1.50},
-    'latte': {'name': 'Latte', 'water': 200, 'milk': 150, 'coffee': 24, 'cost': 2.50},
-    'cappuccino': {'name': 'Cappuccino', 'water': 250, 'milk': 100, 'coffee': 24, 'cost': 3.00}
+    'e': {'name': 'Espresso', 'water': 50, 'milk': 0, 'coffee': 18, 'cost': 1.50},
+    'l': {'name': 'Latte', 'water': 200, 'milk': 150, 'coffee': 24, 'cost': 2.50},
+    'c': {'name': 'Cappuccino', 'water': 250, 'milk': 100, 'coffee': 24, 'cost': 3.00}
 }
 
 def display_report():
@@ -40,14 +40,20 @@ def get_drink_details(drink_type):
 
 def coffee_machine():
     while True:
-        user_input = input("What would you like? (espresso/latte/cappuccino): ").lower()
+        print("\nAvailable Drinks:")
+        for key, drink in drinks.items():
+            print(f"{key} - {drink['name']} (${drink['cost']:.2f}): {drink['water']}ml water, {drink['milk']}ml milk, {drink['coffee']}g coffee")
 
-        if user_input == 'off':
+        user_input = input("\nWhat would you like? (e/ l/ c/ q): ").lower()
+
+        if user_input == 'q':
             break
         elif user_input == 'report':
             display_report()
         elif user_input in drinks:
             drink = get_drink_details(user_input)
+            print(f"Cost: ${drink['cost']:.2f}")
+            print(f"Resources left - Water: {resources['water']}ml, Milk: {resources['milk']}ml, Coffee: {resources['coffee']}g")
             if check_resources(drink['water'], drink['milk'], drink['coffee']):
                 cost = process_coins()
                 if cost >= drink['cost']:
@@ -58,7 +64,7 @@ def coffee_machine():
                 else:
                     print("Sorry that's not enough money. Money refunded.")
             else:
-                print(f"Sorry, not enough resources to make {user_input}.")
+                print(f"Sorry, not enough resources to make {drink['name']}.")
         else:
             print("Invalid input. Please try again.")
 
